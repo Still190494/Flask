@@ -1,4 +1,5 @@
 from blog.views.users import users_app
+from blog.views.articles import articles_app
 from time import time
 from flask import Flask, render_template
 from flask import request
@@ -84,3 +85,4 @@ def handle_zero_division_error(error):
     return "Never divide by zero!", 400
 
 app.register_blueprint(users_app, url_prefix="/users")
+app.register_blueprint(articles_app, url_prefix="/articles")
