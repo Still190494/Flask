@@ -9,7 +9,7 @@ Articles list
 {% for article_id in articles %}
 <li>
     <a href="{{ url_for('articles_app.details', article_id=article_id) }}">
-        {{ articles[article_id] }}
+        {{ articles[article_id].get('text') }}
         </a>
 </li>
 {% endfor %}
