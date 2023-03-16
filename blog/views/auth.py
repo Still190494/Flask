@@ -44,4 +44,4 @@ def logout():
 @auth_app.route("/secret/")
 @login_required
 def secret_view():
-    return "Super secret data"
+    return f"Super secret data"
