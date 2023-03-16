@@ -5,8 +5,14 @@ from flask import Flask, render_template
 from flask import request
 from flask import g
 from werkzeug.exceptions import BadRequest
+from blog.models.database import db
+
 
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////blog.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db.init_app(app)
+
 
 @app.route("/")
 def index():
