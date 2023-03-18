@@ -7,6 +7,7 @@ from flask import g
 from werkzeug.exceptions import BadRequest
 from blog.models.database import db
 from blog.views.auth import login_manager, auth_app
+import os
 
 
 
@@ -17,6 +18,9 @@ app.config["SECRET_KEY"] = "abcdefg123456"
 db.init_app(app)
 login_manager.init_app(app)
 
+
+cfg_name = os.environ.get("CONFIG_NAME") or "ProductionConfig"
+app.config.from_object(f"blog.configs.{cfg_name}")
 
 
 @app.route("/")
