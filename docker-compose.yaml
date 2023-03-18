@@ -5,23 +5,27 @@ services:
       dockerfile: ./Dockerfile
       context: .
     environment:
-      SQLALCHEMY_DATABASE_URI: postgresql://user:password@pg:5432/blog
+      SQLALCHEMY_DATABASE_URI: postgresql://user:password@pg:5432/
       CONFIG_NAME: DevConfig
     volumes:
       - ./blog:/app/blog
     ports:
       - 5000:5000
     depends_on:
-      - pg
+      - db
 
-  pg:
-    image: postgres:12
+  db:
+    image: postgres:12.7-alpine
     environment:
-      POSTGRES_DB: blog
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: 'blog'
+      POSTGRES_USER: 'user'
+      POSTGRES_PASSWORD: 'password'
+      PGDATA: /var/lib/postgresql/data
     volumes:
-      - ${HOME}/dbs/flask-lesson/pgdata_dev:/var/lib/postgresql/data/pgdata
+      - pgdata:/var/lib/postgresql/data
+    privileged: true
+    restart: always
     ports:
       - 5432:5432
+volumes:
+  pgdata:
