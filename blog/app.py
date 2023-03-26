@@ -9,6 +9,7 @@ from blog.models.database import db
 from blog.views.auth import login_manager, auth_app
 import os
 from flask_migrate import Migrate
+from blog.security import flask_bcrypt
 
 
 app = Flask(__name__)
@@ -17,8 +18,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + file_path
 # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////blog.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = "abcdefg123456"
+
+
 db.init_app(app)
 login_manager.init_app(app)
+flask_bcrypt.init_app(app)
+
 
 
 migrate = Migrate(app, db, compare_type=True)
