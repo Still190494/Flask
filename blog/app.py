@@ -1,5 +1,6 @@
 from blog.views.users import users_app
 from blog.views.articles import articles_app
+from blog.views.authors import authors_app
 from time import time
 from flask import Flask, render_template
 from flask import request
@@ -111,3 +112,4 @@ def handle_zero_division_error(error):
 app.register_blueprint(users_app, url_prefix="/users")
 app.register_blueprint(articles_app, url_prefix="/articles")
 app.register_blueprint(auth_app, url_prefix="/auth")
+app.register_blueprint(authors_app, url_prefix="/authors")

@@ -5,15 +5,17 @@ Articles list
 {% block body %}
 <h1>Статьи</h1>
 <div>
-<ul>
-{% for article_id in articles %}
-<li>
-    <a href="{{ url_for('articles_app.details', article_id=article_id) }}">
-        {{ articles[article_id].get('text') }}
-        </a>
-</li>
-{% endfor %}
-</ul>
+    <ul>
+    {% for article in articles %}
+    <li>
+    <a href="{{ url_for('articles_app.details', article_id=article.id) }}">{{
+    article.title }}</a>
+    by {{ article.author.user.username }}
+    </li>
+    {% endfor %}
+    </ul>
+    <hr>
+    <a href="{{ url_for('articles_app.create') }}">Создать статью</a>
 </div>
 {% endblock %}
 
