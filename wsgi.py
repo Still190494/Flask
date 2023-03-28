@@ -31,3 +31,23 @@ def create_admin():
     db.session.add(admin)
     db.session.commit()
     print("done! created users:", admin)
+
+@app.cli.command("create-tags")
+def create_tags():
+    """
+    Run in your terminal:
+    ➜ flask create-tags
+    """
+    from blog.models import Tag
+    for name in [
+    "flask",
+    "django",
+    "python",
+    "sqlalchemy",
+    "news",
+    ]:
+        tag = Tag(name=name)
+        db.session.add(tag)
+    db.session.commit()
+    print("created tags")
+    
