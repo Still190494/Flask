@@ -11,6 +11,7 @@ from blog.views.auth import login_manager, auth_app
 import os
 from flask_migrate import Migrate
 from blog.security import flask_bcrypt
+from blog.admin import admin
 
 
 app = Flask(__name__)
@@ -24,6 +25,7 @@ app.config["SECRET_KEY"] = "abcdefg123456"
 db.init_app(app)
 login_manager.init_app(app)
 flask_bcrypt.init_app(app)
+admin.init_app(app)
 
 
 
