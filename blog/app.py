@@ -1,3 +1,4 @@
+from blog.configs import DevConfig
 from blog.views.users import users_app
 from blog.views.articles import articles_app
 from blog.views.authors import authors_app
@@ -12,27 +13,32 @@ import os
 from flask_migrate import Migrate
 from blog.security import flask_bcrypt
 from blog.admin import admin
-
+from blog.api import init_api
 
 app = Flask(__name__)
-file_path = os.path.abspath(os.getcwd()) + "\database.db"
+
+
+cfg_name = os.environ.get("CONFIG_NAME") or "DevConfig"
+app.config.from_object(f"blog.configs.{cfg_name}")
+
+
+file_path = os.path.abspath(os.getcwd()) + "\db.sqlite"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + file_path
-# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////blog.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SECRET_KEY"] = "abcdefg123456"
-
-
+app.config["SECRET_KEY"] = "123"
 db.init_app(app)
+
+
 login_manager.init_app(app)
 flask_bcrypt.init_app(app)
 admin.init_app(app)
+api = init_api(app)
+
 
 
 
 migrate = Migrate(app, db, compare_type=True)
 
-cfg_name = os.environ.get("CONFIG_NAME") or "DevConfig"
-app.config.from_object(f"blog.configs.{cfg_name}")
 
 
 @app.route("/")

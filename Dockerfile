@@ -11,7 +11,7 @@ COPY wsgi.py wsgi.py
 COPY blog ./blog
 
 RUN flask init-db
-RUN flask create-users
+RUN flask create-admin
 
 EXPOSE 5000
 

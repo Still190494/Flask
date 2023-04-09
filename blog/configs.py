@@ -5,10 +5,15 @@ class BaseConfig(object):
     DEBUG = False
     TESTING = False
     SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
+    # basedir = os.path.abspath(os.path.dirname(__file__))
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = "abcdefg123456"
+    SECRET_KEY = "123"
     WTF_CSRF_ENABLED = True
     FLASK_ADMIN_SWATCH = 'lux'
+    OPENAPI_URL_PREFIX = '/api/swagger'
+    OPENAPI_SWAGGER_UI_PATH = '/'
+    OPENAPI_SWAGGER_UI_VERSION = '3.22.0'
+
 
 
 class DevConfig(BaseConfig):
