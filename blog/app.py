@@ -16,22 +16,24 @@ from blog.admin import admin
 from blog.api import init_api
 
 app = Flask(__name__)
+
+
+cfg_name = os.environ.get("CONFIG_NAME") or "DevConfig"
+app.config.from_object(f"blog.configs.{cfg_name}")
+
+
 file_path = os.path.abspath(os.getcwd()) + "\db.sqlite"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + file_path
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = "123"
-
-
 db.init_app(app)
+
+
 login_manager.init_app(app)
 flask_bcrypt.init_app(app)
-
-
-# cfg_name = os.environ.get("CONFIG_NAME") or "DevConfig"
-# app.config.from_object(DevConfig)
-
 admin.init_app(app)
-# api = init_api(app)
+api = init_api(app)
+
 
 
 
