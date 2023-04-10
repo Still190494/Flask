@@ -10,9 +10,9 @@ RUN pip install -r requirements.txt
 COPY wsgi.py wsgi.py
 COPY blog ./blog
 
-RUN flask init-db
-RUN flask create-admin
-RUN flask create-tags
+# RUN flask init-db
+# RUN flask create-admin
+# RUN flask create-tags
 
 EXPOSE 5000
 
