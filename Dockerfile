@@ -10,6 +10,7 @@ RUN pip install -r requirements.txt
 COPY wsgi.py wsgi.py
 COPY blog ./blog
 
+RUN flask db init
 RUN flask db upgrade
 RUN flask create-admin
 RUN flask create-tags
